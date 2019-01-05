@@ -100,13 +100,15 @@ namespace WebServer
     {
         public static string SendResponse(HttpListenerRequest request)
         {
-            return string.Format("<HTML><BODY>My web page.<br>{0}</BODY></HTML>", DateTime.Now);
+            return string.Format("<HTML><HEAD><META charset=\"UTF-8\"></HEAD><BODY>My web page.<br>{0}</BODY></HTML>", DateTime.Now);
         }
 
         private static void Main(string[] args)
         {
+           // var ws = new WebServer(SendResponse, "http://localhost:8080/test/");
             var ws = new WebServer(SendResponse, "http://localhost:8080/test/");
             ws.Run();
+            Console.WriteLine("WebServer Address = http://localhost:8080/test/");
             Console.WriteLine("A simple webserver. Press a key to quit.");
             Console.ReadKey();
             ws.Stop();

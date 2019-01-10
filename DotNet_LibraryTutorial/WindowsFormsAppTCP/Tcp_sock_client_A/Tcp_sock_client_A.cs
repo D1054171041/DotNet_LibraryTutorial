@@ -14,17 +14,19 @@ namespace socket_prog
             byte[] data = new byte[10];
 
             IPHostEntry iphostInfo = Dns.GetHostEntry(Dns.GetHostName());
-            IPAddress ipAdress = iphostInfo.AddressList[0];
-            IPEndPoint ipEndpoint = new IPEndPoint(ipAdress, 32000);
+            IPAddress ipAdress = iphostInfo.AddressList[2];
+            IPEndPoint ipEndpoint = new IPEndPoint(ipAdress, 8080);// 32000);
 
             Socket client = new Socket(ipAdress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-
+ 
             try
             {
                 client.Connect(ipEndpoint);
 
-                Console.WriteLine("Tcp_sock_client_A.cs");
-                Console.WriteLine("Socket created to {0}", client.RemoteEndPoint.ToString());
+                Console.WriteLine("This is Tcp_sock_client_A.cs");
+
+                Console.WriteLine("LocalEndPoint = {0}", client.LocalEndPoint.ToString());
+                Console.WriteLine("Connected to {0}", client.RemoteEndPoint.ToString());
 
                 byte[] sendmsg = Encoding.ASCII.GetBytes("This is from Client\n");
 

@@ -10,19 +10,22 @@ namespace socket_prog
     {
         static void Main(string[] args)
         {
+            Boolean show_flag = false;
             byte[] buffer = new byte[1000];
             byte[] msg = Encoding.ASCII.GetBytes("From server\n");
             string data = null;
 
-            IPHostEntry iphostInfo = Dns.GetHostEntry(Dns.GetHostName());
-            IPAddress ipAddress = iphostInfo.AddressList[0];
-            IPEndPoint localEndpoint = new IPEndPoint(ipAddress, 32000);
+            IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
+            IPAddress ipAddress = host.AddressList[2];
+            IPEndPoint localEndpoint = new IPEndPoint(ipAddress, 8080);// 32000);
+            Console.WriteLine("This is Tcp_sock_Listen_A.cs");
 
             ConsoleKeyInfo key;
             int count = 0;
 
-            Socket sock = new Socket(ipAddress.AddressFamily,
-                SocketType.Stream, ProtocolType.Tcp);
+            Socket sock = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            //MessageBox.Show(str1);
+            Console.WriteLine("LocalEndPoint: " + localEndpoint);
 
 
             sock.Bind(localEndpoint);
@@ -31,9 +34,12 @@ namespace socket_prog
             while (true)
             {
 
-                Console.WriteLine("\nTcp_sock_Listen_A.cs");
                 Console.WriteLine("\nWaiting for clients..{0}", count);
                 Socket confd = sock.Accept();
+                string str1 = confd.RemoteEndPoint.ToString();
+                //MessageBox.Show(str1);
+                Console.WriteLine("RemoteEndPoint: " + str1);
+
 
                 int b = confd.Receive(buffer);
                 data += Encoding.ASCII.GetString(buffer, 0, b);

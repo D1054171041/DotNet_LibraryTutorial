@@ -17,8 +17,14 @@ namespace socket_prog
             IPAddress ipAdress = iphostInfo.AddressList[2];
             IPEndPoint ipEndpoint = new IPEndPoint(ipAdress, 8080);// 32000);
 
+            IPAddress localIPAddress = ipAdress;
+            IPEndPoint localEndPoint = new IPEndPoint(localIPAddress, 9000);
+
             Socket client = new Socket(ipAdress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
- 
+
+            client.Bind(localEndPoint);
+            //client.Listen(5);
+
             try
             {
                 client.Connect(ipEndpoint);

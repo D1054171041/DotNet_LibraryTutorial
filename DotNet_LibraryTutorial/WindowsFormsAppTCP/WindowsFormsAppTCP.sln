@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tcp_sock_Listen_A", "Tcp_so
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tcp_sock_client_A", "Tcp_sock_client_A\Tcp_sock_client_A.csproj", "{927D5F7F-D774-4230-BFB0-4356DF2582A8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tcp_sock_client_Form_B", "Tcp_sock_client_Form_B\Tcp_sock_client_Form_B.csproj", "{F61F12B4-CBA6-4F2B-920E-0D56B5F02515}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{927D5F7F-D774-4230-BFB0-4356DF2582A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{927D5F7F-D774-4230-BFB0-4356DF2582A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{927D5F7F-D774-4230-BFB0-4356DF2582A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F61F12B4-CBA6-4F2B-920E-0D56B5F02515}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F61F12B4-CBA6-4F2B-920E-0D56B5F02515}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F61F12B4-CBA6-4F2B-920E-0D56B5F02515}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F61F12B4-CBA6-4F2B-920E-0D56B5F02515}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

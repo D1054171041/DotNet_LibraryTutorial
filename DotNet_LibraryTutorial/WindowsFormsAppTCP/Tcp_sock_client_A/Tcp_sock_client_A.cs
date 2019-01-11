@@ -29,10 +29,10 @@ namespace socket_prog
             {
                 client.Connect(ipEndpoint);
 
-                Console.WriteLine("This is Tcp_sock_client_A.cs");
+                Console.WriteLine("Tcp Client => Tcp_sock_client_A.cs");
 
                 Console.WriteLine("LocalEndPoint = {0}", client.LocalEndPoint.ToString());
-                Console.WriteLine("Connected to {0}", client.RemoteEndPoint.ToString());
+                Console.WriteLine("\nConnected to Server = {0}", client.RemoteEndPoint.ToString());
 
                 byte[] sendmsg = Encoding.ASCII.GetBytes("This is from Client\n");
 

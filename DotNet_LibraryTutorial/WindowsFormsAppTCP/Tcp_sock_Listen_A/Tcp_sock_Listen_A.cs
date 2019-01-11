@@ -18,7 +18,7 @@ namespace socket_prog
             IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
             IPAddress ipAddress = host.AddressList[2];
             IPEndPoint localEndpoint = new IPEndPoint(ipAddress, 8080);// 32000);
-            Console.WriteLine("This is Tcp_sock_Listen_A.cs");
+            Console.WriteLine("Tcp Server => Tcp_sock_Listen_A.cs");
 
             ConsoleKeyInfo key;
             int count = 0;
@@ -34,7 +34,7 @@ namespace socket_prog
             while (true)
             {
 
-                Console.WriteLine("\nWaiting for clients..{0}", count);
+                Console.WriteLine("\nWaiting for Remote_clients..{0}", count);
                 Socket confd = sock.Accept();
                 string str1 = confd.RemoteEndPoint.ToString();
                 //MessageBox.Show(str1);

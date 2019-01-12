@@ -1,13 +1,7 @@
 ﻿//https://youtu.be/ObcGBT4ZWEU
 //C# Tutorial 78: How to make a Chat Program in C# Part 1234
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using System.Net;

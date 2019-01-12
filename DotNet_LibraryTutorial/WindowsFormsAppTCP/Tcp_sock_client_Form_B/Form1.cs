@@ -7,21 +7,22 @@ namespace Tcp_sock_client_Form_B
 {
     public partial class Tcp_sock : Form
     {
-        Socket sck;
-        EndPoint epLocal, epRemote;
+        int Port1 = 8080;
+        int Port2 = 9000;
+        Socket sckClient,sckServer;
+        EndPoint epLocalServer, epRemoteServer;
+        EndPoint epLocalClient, epRemoteClient;
         public Tcp_sock()
         {
-            int Port1 = 8080;
-            int Port2 = 9000;
             InitializeComponent();
-            Server_IP_textBox.Text = GetLocalIP();
-            Server_Port_textBox.Text = Port1.ToString();
-            Client_IP_textBox.Text = GetLocalIP();
-            Client_Port_textBox.Text = Port2.ToString();
-            epLocal = new IPEndPoint(IPAddress.Parse(Client_IP_textBox.Text), Convert.ToInt32(Client_Port_textBox.Text));
-            epRemote = new IPEndPoint(IPAddress.Parse(Server_IP_textBox.Text), Convert.ToInt32(Server_Port_textBox.Text));
+            Local_IP_textBox.Text = GetLocalIP();
+            L_Server_Port_textBox.Text = Port1.ToString();
+            L_Client_Port_textBox.Text = Port2.ToString();
 
-            Socket sck = new Socket(epRemote.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            epLocalServer = new IPEndPoint(IPAddress.Parse(Local_IP_textBox.Text), Convert.ToInt32(L_Server_Port_textBox.Text));
+            epRemoteServer = new IPEndPoint(IPAddress.Parse(Remote_IP_textBox.Text), Convert.ToInt32(R_Server_Port_textBox.Text));
+
+            Socket sck = new Socket(epRemoteServer.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             sck.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
             Message_listBox.Items.Add("Tcp_sock_client_A.cs");
             Message_listBox.Items.Add("HELLO");
@@ -44,8 +45,6 @@ namespace Tcp_sock_client_Form_B
             return "127.0.0.1";
         }
 
-
-
         private void Server_groupBox_Enter(object sender, EventArgs e)
         {
 
@@ -56,19 +55,27 @@ namespace Tcp_sock_client_Form_B
 
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Remote_IP_textBox.Text = GetLocalIP();
+            R_Server_Port_textBox.Text = (Port1+1).ToString();
+            R_Client_Port_textBox.Text = (Port2+1).ToString();
+
+        }
+
         private void ConnectBtn_Click(object sender, EventArgs e)
         {
                try
                 {
-                sck.Bind(epLocal);
-                sck.Connect(epRemote);
+                sckClient.Bind(epLocalServer);
+                sckClient.Connect(epRemoteServer);
 
 
                 Message_listBox.Items.Add("Tcp Client => Tcp_sock_client_A.cs");
                 Message_listBox.Items.Add("LocalEndPoint = ");
-                Message_listBox.Items.Add(sck.LocalEndPoint.ToString());
+                Message_listBox.Items.Add(sckClient.LocalEndPoint.ToString());
                 Message_listBox.Items.Add("Connected to Server = ");
-                Message_listBox.Items.Add(sck.RemoteEndPoint.ToString());
+                Message_listBox.Items.Add(sckClient.RemoteEndPoint.ToString());
 
                 //byte[] sendmsg = Encoding.ASCII.GetBytes("This is from Client\n");
 

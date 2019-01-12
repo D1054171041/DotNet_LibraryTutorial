@@ -10,13 +10,13 @@ namespace socket_prog
     {
         static void Main(string[] args)
         {
-            Boolean show_flag = false;
+            //Boolean show_flag = false;
             byte[] buffer = new byte[1000];
             byte[] msg = Encoding.ASCII.GetBytes("From server\n");
             string data = null;
 
             IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
-            IPAddress ipAddress = host.AddressList[2];
+            IPAddress ipAddress = host.AddressList[1];
             IPEndPoint localEndpoint = new IPEndPoint(ipAddress, 8080);// 32000);
             Console.WriteLine("Tcp Server => Tcp_sock_Listen_A.cs");
 
@@ -34,7 +34,7 @@ namespace socket_prog
             while (true)
             {
 
-                Console.WriteLine("\nWaiting for Remote_clients..{0}", count);
+                Console.WriteLine($"\nWaiting for Remote_clients..{count}");
                 Socket confd = sock.Accept();
                 string str1 = confd.RemoteEndPoint.ToString();
                 //MessageBox.Show(str1);

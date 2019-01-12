@@ -9,12 +9,27 @@ namespace socket_prog
 {
     class Client
     {
+        private static string GetLocalIP()
+        {
+            IPHostEntry host;
+            host = Dns.GetHostEntry(Dns.GetHostName());
+
+            foreach (IPAddress ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            return "127.0.0.1";
+        }
+
         private static void Main(String[] args)
         {
             byte[] data = new byte[10];
 
             IPHostEntry iphostInfo = Dns.GetHostEntry(Dns.GetHostName());
-            IPAddress ipAdress = iphostInfo.AddressList[2];
+            IPAddress ipAdress = IPAddress.Parse(GetLocalIP());
             IPEndPoint ipEndpoint = new IPEndPoint(ipAdress, 8080);// 32000);
 
             IPAddress localIPAddress = ipAdress;

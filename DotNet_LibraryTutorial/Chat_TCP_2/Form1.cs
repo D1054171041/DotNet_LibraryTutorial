@@ -27,10 +27,5 @@ namespace Chat_TCP_2
                 }
             }
         }
-
-        private void btnConnect_Click(object sender, System.EventArgs e)
-        {
-
-        }
     }
 }

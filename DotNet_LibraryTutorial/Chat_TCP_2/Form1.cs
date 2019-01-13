@@ -32,14 +32,13 @@ namespace Chat_TCP_2
 
         private void BtnStart_Click(object sender, System.EventArgs e)
         {
-            TcpListener listener = new TcpListener(IPAddress.Any, int.Parse(ServerPortTextBox.Text));
+           // TcpListener listener = new TcpListener(IPAddress.Any, int.Parse(ServerPortTextBox.Text));
+            TcpListener listener = new TcpListener(IPAddress.Parse(ServerIPtextBox.Text), int.Parse(ServerPortTextBox.Text));
             listener.Start();
             client = listener.AcceptTcpClient();
             STR = new StreamReader(client.GetStream());
-            STW = new StreamWriter(client.GetStream())
-            {
-                AutoFlush = true
-            };
+            STW = new StreamWriter(client.GetStream());
+            STW.AutoFlush = true;
             backgroundWorker1.RunWorkerAsync();
             backgroundWorker2.WorkerSupportsCancellation = true;
 

@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using System;
+using System.Text;
 
 namespace Chat_TCP_2
 {
@@ -35,12 +36,15 @@ namespace Chat_TCP_2
            // TcpListener listener = new TcpListener(IPAddress.Any, int.Parse(ServerPortTextBox.Text));
             TcpListener listener = new TcpListener(IPAddress.Parse(ServerIPtextBox.Text), int.Parse(ServerPortTextBox.Text));
             listener.Start();
-            client = listener.AcceptTcpClient();
-            STR = new StreamReader(client.GetStream());
-            STW = new StreamWriter(client.GetStream());
-            STW.AutoFlush = true;
-            backgroundWorker1.RunWorkerAsync();
-            backgroundWorker2.WorkerSupportsCancellation = true;
+            ChatScreenTextBox.AppendText($"Server EndPoint = {listener.LocalEndpoint.ToString()}\n");
+            Socket socket_c = listener.AcceptSocket();
+            ChatScreenTextBox.AppendText($"Client EndPoint = {socket_c.RemoteEndPoint.ToString()}\n");
+            socket_c.Send(Encoding.ASCII.GetBytes("hello"));
+            //STR = new StreamReader(client.GetStream());
+            //STW = new StreamWriter(client.GetStream());
+            //STW.AutoFlush = true;
+            //backgroundWorker1.RunWorkerAsync();
+            //backgroundWorker2.WorkerSupportsCancellation = true;
 
         }
 

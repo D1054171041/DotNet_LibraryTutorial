@@ -33,7 +33,7 @@ namespace Chat_TCP_2
             this.ServerGroupBox = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.BtnStart = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
             this.ServerPortTextBox = new System.Windows.Forms.TextBox();
             this.ServerIPtextBox = new System.Windows.Forms.TextBox();
             this.ClientGroupBox = new System.Windows.Forms.GroupBox();
@@ -42,13 +42,10 @@ namespace Chat_TCP_2
             this.label3 = new System.Windows.Forms.Label();
             this.ClientPortTextBox = new System.Windows.Forms.TextBox();
             this.ClientIPtextBox = new System.Windows.Forms.TextBox();
-            this.MessageTextBox = new System.Windows.Forms.TextBox();
+            this.textMessage = new System.Windows.Forms.TextBox();
             this.btnSend = new System.Windows.Forms.Button();
             this.btnDisconnected = new System.Windows.Forms.Button();
-            this.ChatScreenTextBox = new System.Windows.Forms.TextBox();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
-            this.btnGetHostIP = new System.Windows.Forms.Button();
+            this.listMessage = new System.Windows.Forms.ListBox();
             this.ServerGroupBox.SuspendLayout();
             this.ClientGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -57,7 +54,7 @@ namespace Chat_TCP_2
             // 
             this.ServerGroupBox.Controls.Add(this.label2);
             this.ServerGroupBox.Controls.Add(this.label1);
-            this.ServerGroupBox.Controls.Add(this.BtnStart);
+            this.ServerGroupBox.Controls.Add(this.btnStart);
             this.ServerGroupBox.Controls.Add(this.ServerPortTextBox);
             this.ServerGroupBox.Controls.Add(this.ServerIPtextBox);
             this.ServerGroupBox.Location = new System.Drawing.Point(23, 32);
@@ -87,16 +84,15 @@ namespace Chat_TCP_2
             this.label1.TabIndex = 2;
             this.label1.Text = "IP";
             // 
-            // BtnStart
+            // btnStart
             // 
-            this.BtnStart.Location = new System.Drawing.Point(187, 100);
-            this.BtnStart.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.BtnStart.Name = "BtnStart";
-            this.BtnStart.Size = new System.Drawing.Size(75, 22);
-            this.BtnStart.TabIndex = 4;
-            this.BtnStart.Text = "START";
-            this.BtnStart.UseVisualStyleBackColor = true;
-            this.BtnStart.Click += new System.EventHandler(this.BtnStart_Click);
+            this.btnStart.Location = new System.Drawing.Point(187, 100);
+            this.btnStart.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(75, 22);
+            this.btnStart.TabIndex = 4;
+            this.btnStart.Text = "START";
+            this.btnStart.UseVisualStyleBackColor = true;
             // 
             // ServerPortTextBox
             // 
@@ -116,7 +112,6 @@ namespace Chat_TCP_2
             // 
             // ClientGroupBox
             // 
-            this.ClientGroupBox.Controls.Add(this.btnGetHostIP);
             this.ClientGroupBox.Controls.Add(this.btnConnect);
             this.ClientGroupBox.Controls.Add(this.label4);
             this.ClientGroupBox.Controls.Add(this.label3);
@@ -140,7 +135,6 @@ namespace Chat_TCP_2
             this.btnConnect.TabIndex = 6;
             this.btnConnect.Text = "CONNECT";
             this.btnConnect.UseVisualStyleBackColor = true;
-            this.btnConnect.Click += new System.EventHandler(this.BtnConnect_Click);
             // 
             // label4
             // 
@@ -176,69 +170,52 @@ namespace Chat_TCP_2
             this.ClientIPtextBox.Size = new System.Drawing.Size(135, 25);
             this.ClientIPtextBox.TabIndex = 0;
             // 
-            // MessageTextBox
+            // textMessage
             // 
-            this.MessageTextBox.Location = new System.Drawing.Point(23, 360);
-            this.MessageTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.MessageTextBox.Name = "MessageTextBox";
-            this.MessageTextBox.Size = new System.Drawing.Size(475, 25);
-            this.MessageTextBox.TabIndex = 2;
+            this.textMessage.Location = new System.Drawing.Point(23, 360);
+            this.textMessage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textMessage.Name = "textMessage";
+            this.textMessage.Size = new System.Drawing.Size(563, 25);
+            this.textMessage.TabIndex = 2;
             // 
             // btnSend
             // 
-            this.btnSend.Location = new System.Drawing.Point(524, 358);
+            this.btnSend.Location = new System.Drawing.Point(605, 360);
             this.btnSend.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(75, 25);
             this.btnSend.TabIndex = 5;
             this.btnSend.Text = "SEND";
             this.btnSend.UseVisualStyleBackColor = true;
-            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
             // 
             // btnDisconnected
             // 
-            this.btnDisconnected.Location = new System.Drawing.Point(605, 131);
+            this.btnDisconnected.Location = new System.Drawing.Point(605, 146);
             this.btnDisconnected.Name = "btnDisconnected";
-            this.btnDisconnected.Size = new System.Drawing.Size(126, 30);
+            this.btnDisconnected.Size = new System.Drawing.Size(126, 23);
             this.btnDisconnected.TabIndex = 6;
             this.btnDisconnected.Text = "Disconnected";
             this.btnDisconnected.UseVisualStyleBackColor = true;
             // 
-            // ChatScreenTextBox
+            // listMessage
             // 
-            this.ChatScreenTextBox.Location = new System.Drawing.Point(23, 173);
-            this.ChatScreenTextBox.Multiline = true;
-            this.ChatScreenTextBox.Name = "ChatScreenTextBox";
-            this.ChatScreenTextBox.Size = new System.Drawing.Size(576, 166);
-            this.ChatScreenTextBox.TabIndex = 7;
-            // 
-            // backgroundWorker1
-            // 
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            // 
-            // backgroundWorker2
-            // 
-            this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker2_DoWork);
-            // 
-            // btnGetHostIP
-            // 
-            this.btnGetHostIP.Location = new System.Drawing.Point(34, 103);
-            this.btnGetHostIP.Name = "btnGetHostIP";
-            this.btnGetHostIP.Size = new System.Drawing.Size(101, 23);
-            this.btnGetHostIP.TabIndex = 7;
-            this.btnGetHostIP.Text = "Host IP:Port";
-            this.btnGetHostIP.UseVisualStyleBackColor = true;
-            this.btnGetHostIP.Click += new System.EventHandler(this.btnGetHostIP_Click);
+            this.listMessage.FormattingEnabled = true;
+            this.listMessage.ItemHeight = 15;
+            this.listMessage.Location = new System.Drawing.Point(23, 186);
+            this.listMessage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.listMessage.Name = "listMessage";
+            this.listMessage.Size = new System.Drawing.Size(657, 154);
+            this.listMessage.TabIndex = 3;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(734, 408);
-            this.Controls.Add(this.ChatScreenTextBox);
             this.Controls.Add(this.btnDisconnected);
             this.Controls.Add(this.btnSend);
-            this.Controls.Add(this.MessageTextBox);
+            this.Controls.Add(this.listMessage);
+            this.Controls.Add(this.textMessage);
             this.Controls.Add(this.ClientGroupBox);
             this.Controls.Add(this.ServerGroupBox);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -264,15 +241,12 @@ namespace Chat_TCP_2
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox ClientPortTextBox;
         private System.Windows.Forms.TextBox ClientIPtextBox;
-        private System.Windows.Forms.TextBox MessageTextBox;
-        private System.Windows.Forms.Button BtnStart;
+        private System.Windows.Forms.TextBox textMessage;
+        private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnSend;
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.Button btnDisconnected;
-        private System.Windows.Forms.TextBox ChatScreenTextBox;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.ComponentModel.BackgroundWorker backgroundWorker2;
-        private System.Windows.Forms.Button btnGetHostIP;
+        private System.Windows.Forms.ListBox listMessage;
     }
 }
 

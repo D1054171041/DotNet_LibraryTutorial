@@ -29,6 +29,7 @@ namespace Chat_TCP_2
                 }
             }
             ServerPortTextBox.Text = "8080";
+           // ServerGroupBox.Text = "Local : SERVER";
         }
 
         private void BtnStart_Click(object sender, System.EventArgs e)
@@ -36,9 +37,9 @@ namespace Chat_TCP_2
            // TcpListener listener = new TcpListener(IPAddress.Any, int.Parse(ServerPortTextBox.Text));
             TcpListener listener = new TcpListener(IPAddress.Parse(ServerIPtextBox.Text), int.Parse(ServerPortTextBox.Text));
             listener.Start();
-            ChatScreenTextBox.AppendText($"Server EndPoint = {listener.LocalEndpoint.ToString()}\n");
+            ChatScreenTextBox.AppendText($"Local Server = {listener.LocalEndpoint.ToString()}\n");
             Socket socket_c = listener.AcceptSocket();
-            ChatScreenTextBox.AppendText($"Client EndPoint = {socket_c.RemoteEndPoint.ToString()}\n");
+            ChatScreenTextBox.AppendText($"Remote Client = {socket_c.RemoteEndPoint.ToString()}\n");
             socket_c.Send(Encoding.ASCII.GetBytes("hello"));
             //STR = new StreamReader(client.GetStream());
             //STW = new StreamWriter(client.GetStream());
@@ -51,13 +52,14 @@ namespace Chat_TCP_2
         private void BtnConnect_Click(object sender, System.EventArgs e)
         {
             client = new TcpClient();
-            IPEndPoint IPEnd = new IPEndPoint(IPAddress.Parse(ClientIPtextBox.Text), int.Parse(ClientPortTextBox.Text));
+            IPEndPoint RemoteServerEnd = new IPEndPoint(IPAddress.Parse(ClientIPtextBox.Text), int.Parse(ClientPortTextBox.Text));
             try
             {
-                client.Connect(IPEnd);
+                client.Connect(RemoteServerEnd);
                 if(client.Connected)
                 {
-                    ChatScreenTextBox.AppendText("Connected to Server ok" + "\n");
+                    ChatScreenTextBox.AppendText($"Local = {client.Client.LocalEndPoint.ToString()}\n");
+                    ChatScreenTextBox.AppendText($"Connected to Server = {client.Client.RemoteEndPoint.ToString()}");
                     STR = new StreamReader(client.GetStream());
                     STW = new StreamWriter(client.GetStream());
                     STW.AutoFlush = true;
